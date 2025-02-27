@@ -32,31 +32,11 @@
             max-width: 26%;
             border-radius: 20px;
             margin-right: 5%;
-            animation: slideInRight 1s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
         }
         .navbar {
             background-color: #ffffff;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             padding: 15px;
-        }
-        .navbar-brand img {
-            width: 80px;
-        }
-        .nav-link {
-            font-weight: bold;
-            color: #004aad !important;
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: #6a11cb !important;
         }
         .section {
             padding: 80px 20px;
@@ -65,7 +45,6 @@
             border-radius: 20px;
             margin-top: 30px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1.5s ease-in-out;
         }
         .btn-primary {
             background-color: #030068;
@@ -79,19 +58,26 @@
             background-color: #110362;
         }
         .brand-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 30px;
-    color:rgb(1, 1, 207)
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px;
+            color: rgb(1, 1, 207);
         }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+        .logo {
+    width: 200px;
+    height: 200px;
+}
 
+
+        
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="health-care-logo-design-with-blue-color-white-background_809852-491.avif" alt="Hospital Logo">
+                <img src="health-care-logo-design-with-blue-color-white-background_809852-491.avif" 
+     alt="Hospital Logo" class="logo">
             </a>
             <span class="brand-title">MediCare Hub</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -103,23 +89,24 @@
                     <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Doctors</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">logout</a></li>
-
+                    <li class="nav-item"><a class="nav-link" href="login.html">Logout</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <header class="hero">
         <div class="hero-text">
-            <h1 class="display-4">Hospital Management System</h1>
+            <h1 class="display-4" id="greeting">Hospital Management System</h1>
             <p class="lead">Efficiently managing hospital activities and services</p>
-            <a href="get.html" class="btn btn-primary">Get Started</a>
+            <a href="get.html" class="btn btn-primary" id="getStartedBtn">Get Started</a>
         </div>
         <img src="sec.webp" alt="Hospital System">
     </header>
 
-    <section class="section text-center">
+    <!-- Services Section -->
+    <section class="section text-center" id="servicesSection">
         <div class="container">
             <h2>Our Services</h2>
             <p class="text-muted">Providing top-notch healthcare solutions.</p>
@@ -127,6 +114,69 @@
         </div>
     </section>
 
+    <!-- Toggle Navbar Button -->
+    <div class="text-center mt-4">
+        <button class="btn btn-secondary" id="toggleNavbar">Toggle Navbar</button>
+    </div>
+
+    <!-- JavaScript Code -->
+    <script>
+        // Show a greeting based on time of day
+        function updateGreeting() {
+            let greetingElement = document.getElementById("greeting");
+            let hours = new Date().getHours();
+            if (hours < 12) {
+                greetingElement.textContent = "Good Morning! Welcome to MediCare Hub";
+            } else if (hours < 18) {
+                greetingElement.textContent = "Good Afternoon! Welcome to MediCare Hub";
+            } else {
+                greetingElement.textContent = "Good Evening! Welcome to MediCare Hub";
+            }
+        }
+        updateGreeting();
+
+        // Display an alert when "Get Started" button is clicked
+        document.getElementById("getStartedBtn").addEventListener("click", function(event) {
+            event.preventDefault(); 
+            alert("Welcome to MediCare Hub! Redirecting you to the next page...");
+            window.location.href = "get.html"; 
+        });
+
+        // Change navbar background color on scroll
+        window.addEventListener("scroll", function() {
+            let navbar = document.querySelector(".navbar");
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = "#004aad";
+                navbar.style.transition = "background-color 0.1s";
+            } else {
+                navbar.style.backgroundColor = "#ffffff";
+            }
+        });
+
+        // Change text color when hovering over services section
+        let servicesSection = document.getElementById("servicesSection");
+        servicesSection.addEventListener("mouseover", function() {
+            servicesSection.style.color = "#004aad";
+        });
+        servicesSection.addEventListener("mouseout", function() {
+            servicesSection.style.color = "#333";
+        });
+
+        // Toggle navbar visibility on button click
+        document.getElementById("toggleNavbar").addEventListener("click", function() {
+            let navbar = document.getElementById("navbar");
+            if (navbar.style.display === "none") {
+                navbar.style.display = "block";
+            } else {
+                navbar.style.display = "none";
+            }
+        });
+
+        // Console message when page loads
+        console.log("Welcome to the Hospital Management System!");
+    </script>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
